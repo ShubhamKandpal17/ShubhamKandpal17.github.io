@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState }from "react";
+import { useEffect } from "react";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
 import Zoom from "@material-ui/core/Zoom";
@@ -7,9 +8,24 @@ function CreateArea(props) {
   const [isExpanded, setExpanded] = useState(false);
 
   const [note, setNote] = useState({
-    title: "",
-    content: ""
+    title: props.selectedNote ? props.selectedNote.title : "", // Populate title
+    content: props.selectedNote ? props.selectedNote.content : "" // Populate content
   });
+  useEffect(() => {
+    if (props.selectedNote) {
+      setNote({
+        title: props.selectedNote.title,
+        content: props.selectedNote.content
+      });
+      setExpanded(true);
+    } else {
+      setNote({
+        title: "",
+        content: ""
+      });
+      setExpanded(false);
+    }
+  }, [props.selectedNote]);
 
   function handleChange(event) {
     const { name, value } = event.target;

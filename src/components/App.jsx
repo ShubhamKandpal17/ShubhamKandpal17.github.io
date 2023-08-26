@@ -21,10 +21,26 @@ function App() {
     });
   }
 
+  const [selectedNote, setSelectedNote] = useState(null);
+
+  function editNote(id) {
+    setSelectedNote({
+      title : notes[id].title,
+      content : notes[id].content
+    });
+    deleteNote(id)
+  }
+
+
+
   return (
     <div>
       <Header />
-      <CreateArea onAdd={addNote} />
+      <CreateArea 
+        onAdd={addNote} 
+        selectedNote={selectedNote}
+        />
+
       {notes.map((noteItem, index) => {
         return (
           <Note
@@ -33,6 +49,7 @@ function App() {
             title={noteItem.title}
             content={noteItem.content}
             onDelete={deleteNote}
+            onEdit = {editNote}
           />
         );
       })}
