@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
+
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -11,6 +12,7 @@ function App() {
     setNotes(prevNotes => {
       return [...prevNotes, newNote];
     });
+
   }
 
   function deleteNote(id) {
@@ -30,7 +32,6 @@ function App() {
     });
     deleteNote(id)
   }
-
 
 
   return (
@@ -56,6 +57,8 @@ function App() {
       <Footer />
     </div>
   );
+
+
 }
 
 export default App;
